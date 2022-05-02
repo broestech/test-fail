@@ -1,0 +1,27 @@
+/*
+** Makes the typescript generator plugin available.
+ */
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+}
+
+plugins {
+    id 'org.springframework.boot' version '2.5.13'
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+
+    implementation 'org.springframework.security.oauth:spring-security-oauth2:2.5.2.RELEASE'
+    // https://mvnrepository.com/artifact/org.springframework.security/spring-security-test
+
+
+}
+
+
+springBoot {
+    mainClass.set('com.broeskamp.maagent.MitnormAgentCoreApplication')
+}

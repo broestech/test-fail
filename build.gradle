@@ -1,0 +1,51 @@
+plugins {
+    // https://plugins.gradle.org/plugin/io.spring.dependency-management
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    // https://plugins.gradle.org/plugin/io.freefair.lombok
+    id "io.freefair.lombok" version "6.4.3" apply false
+    id "idea"
+}
+
+
+subprojects {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java'
+    apply plugin: 'io.freefair.lombok'
+    apply plugin: 'idea'
+
+    sourceCompatibility = 11
+    targetCompatibility = 11
+
+    idea {
+        module {
+            downloadJavadoc(true)
+            downloadSources(true)
+        }
+    }
+
+    group = 'com.broeskamp.mitnorm-agent'
+    version = '0.0.1-SNAPSHOT'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            // https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-dependencies
+            mavenBom("org.springframework.boot:spring-boot-dependencies:2.6.7")
+        }
+    }
+
+    dependencies {
+        compileOnly 'org.projectlombok:lombok:1.18.24'
+        annotationProcessor 'org.projectlombok:lombok'
+    }
+
+
+    repositories {
+        mavenCentral()
+    }
+}
